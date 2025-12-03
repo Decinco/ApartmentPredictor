@@ -206,7 +206,7 @@ Chef .. Kitchen : Link(Dashed)
 
 ![](https://raw.githubusercontent.com/AlbertProfe/ApartmentPredictor/refs/heads/master/docs/diagrams/ApartmentPredictor-uml_v1.png)
 
-## Pom.xml
+## pom.xml
 
 ```xml
 todo
