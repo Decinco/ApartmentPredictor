@@ -355,6 +355,23 @@ Calls that will work
 
 ![](https://raw.githubusercontent.com/AlbertProfe/ApartmentPredictor/refs/heads/master/docs/screenshots/code-restcontroller.png)
 
+Post operation: POST Cycle: Create New Apartment
+
+This cycle involves sending new data to be persisted in the Database.
+
+**Step-by-Step Breakdown:**
+
+1. **Request:** The user sends a JSON body via Postman to the `/create` endpoint.
+2. **Controller:** Captures the JSON and converts it into an `Apartment` object.
+3. **Service:** Receives the object and triggers the `save()` method.
+4. **Repository:** Executes an `INSERT` SQL command.
+
+Link: 
+
+- [Request/response Cycle](https://github.com/alexpjava/ApartmentPredictorAlpy/blob/main/docs/flow_request_response_cycle_en.md) by Alex P.
+
+![](https://raw.githubusercontent.com/AlbertProfe/ApartmentPredictor/refs/heads/master/docs/screenshots/UNL-reqres-RESTController.png)
+
 #### Postman documentation API REST
 
 - [apartmentPredictorCRUD](https://documenter.getpostman.com/view/7473960/2sBXVeFs8L)
