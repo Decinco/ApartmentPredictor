@@ -62,7 +62,8 @@ public class ApartmentRestController {
     @GetMapping("/populate")
     public ResponseEntity<String> populateApartments(@RequestParam int qty) {
         int qtyApartmetnsCreated = populateDB.populateApartments(qty);
-        return ResponseEntity.ok("Populated apartments: " + qtyApartmetnsCreated);
+        if (qtyApartmetnsCreated > 0) return ResponseEntity.ok("Populated apartments: " + qtyApartmetnsCreated);
+        else return ResponseEntity.badRequest().body("Failed to populate apartments");
     }
     
 
