@@ -3,7 +3,7 @@ spring:
     name: ApartmentPredictor
 
   datasource:
-    url: jdbc:h2:file:/data/aptPredictor
+    url: jdbc:h2:file:./data/aptPredictor
     driverClassName: org.h2.Driver
     username: decin-co
     password: 1
