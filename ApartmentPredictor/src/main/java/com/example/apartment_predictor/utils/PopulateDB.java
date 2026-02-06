@@ -1,9 +1,13 @@
 package com.example.apartment_predictor.utils;
 
 import com.example.apartment_predictor.model.Apartment;
+import com.example.apartment_predictor.model.FurnishingStatus;
 import com.example.apartment_predictor.service.ApartmentService;
+import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component
@@ -12,59 +16,39 @@ public class PopulateDB {
     @Autowired
     ApartmentService apartmentService;
 
-    public int populateApartments(int qty) {
-        int qtyApartmetnsCreated = 0;
-        if (qty <= 0) return 0;
+    Faker faker = new Faker();
 
-        //Faker faker = new Faker(new Locale("en-US"));
-        ThreadLocalRandom rnd = ThreadLocalRandom.current();
+    public int populateApartments(int qty){
+        int qtyAdded = 0;
 
-        String[] furnishingOptions = {"furnished", "semi-furnished", "unfurnished"};
+        Random random = new Random();
 
-        for (int i = 0; i < qty; i++) {
-            Long price = rnd.nextLong(30_000, 600_001);          // adjust range if you want
-            Integer area = rnd.nextInt(300, 5001);              // adjust range if you want
-            Integer bedrooms = rnd.nextInt(1, 7);
-            Integer bathrooms = rnd.nextInt(1, 5);
-            Integer stories = rnd.nextInt(1, 5);
+        for (int i = 0; i < qty; i++){
 
-            String mainroad = rnd.nextBoolean() ? "yes" : "no";
-            String guestroom = rnd.nextBoolean() ? "yes" : "no";
-            String basement = rnd.nextBoolean() ? "yes" : "no";
-            String hotwaterheating = rnd.nextBoolean() ? "yes" : "no";
-            String airconditioning = rnd.nextBoolean() ? "yes" : "no";
-            Integer parking = rnd.nextInt(0, 4);
-            String prefarea = rnd.nextBoolean() ? "yes" : "no";
+            Apartment apartment = new Apartment();
+            apartment.setId(faker.numerify(faker.number().digits(5)));
+            apartment.setName("Casa en " + faker.address().cityName());
+            apartment.setPrice(random.nextLong(1400000) + 50000);
+            apartment.setArea(random.nextInt(190) + 30);
+            apartment.setStories(random.nextInt(2) + 1);
+            apartment.setBedrooms(random.nextInt(4) + 1);
+            apartment.setBathrooms(random.nextInt(4) + 1);
+            apartment.setGuestroom(random.nextBoolean());
+            apartment.setBasement(random.nextBoolean());
+            apartment.setHotwaterheating(random.nextBoolean());
+            apartment.setAirconditioning(random.nextBoolean());
+            apartment.setParking(random.nextBoolean());
+            apartment.setFurnishingstatus(FurnishingStatus.values()[random.nextInt(FurnishingStatus.values().length - 1)]);
 
-            String furnishingstatus = furnishingOptions[rnd.nextInt(furnishingOptions.length)];
+            FurnishingStatus status = FurnishingStatus.UNFURNISHED;
 
-            Apartment apartment = new Apartment(
-                    price,
-                    area,
-                    bedrooms,
-                    bathrooms,
-                    stories,
-                    mainroad,
-                    guestroom,
-                    basement,
-                    hotwaterheating,
-                    airconditioning,
-                    parking,
-                    prefarea,
-                    furnishingstatus
-            );
 
-            apartmentService.createApartment(apartment);
-
-            Apartment apartmentById = apartmentService.findApartmentById(apartment.getId());
-            if (apartmentById != null) {
-                qtyApartmetnsCreated++;
-                System.out.println(
-                        "Apartment #" + qtyApartmetnsCreated +
-                         "/" + qty + " created populateDB: " + apartmentById);
+            Apartment created = apartmentService.createApartment(apartment);
+            if (created != null){
+                qtyAdded++;
             }
-
         }
-        return qtyApartmetnsCreated;
+
+        return qtyAdded;
     }
 }

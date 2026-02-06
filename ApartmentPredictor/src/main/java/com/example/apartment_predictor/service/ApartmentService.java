@@ -1,12 +1,10 @@
 package com.example.apartment_predictor.service;
 
 import com.example.apartment_predictor.model.Apartment;
-import com.example.apartment_predictor.model.Review;
 import com.example.apartment_predictor.repository.ApartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,23 +43,12 @@ public class ApartmentService {
         if (apartment.getBedrooms() != null) existing.setBedrooms(apartment.getBedrooms());
         if (apartment.getBathrooms() != null) existing.setBathrooms(apartment.getBathrooms());
         if (apartment.getStories() != null) existing.setStories(apartment.getStories());
-        if (apartment.getMainroad() != null) existing.setMainroad(apartment.getMainroad());
-        if (apartment.getGuestroom() != null) existing.setGuestroom(apartment.getGuestroom());
-        if (apartment.getBasement() != null) existing.setBasement(apartment.getBasement());
-        if (apartment.getHotwaterheating() != null) existing.setHotwaterheating(apartment.getHotwaterheating());
-        if (apartment.getAirconditioning() != null) existing.setAirconditioning(apartment.getAirconditioning());
-        if (apartment.getParking() != null) existing.setParking(apartment.getParking());
-        if (apartment.getPrefarea() != null) existing.setPrefarea(apartment.getPrefarea());
-        if (apartment.getFurnishingstatus() != null) existing.setFurnishingstatus(apartment.getFurnishingstatus());
-
-        if (apartment.getReviews() != null) {
-            existing.setReviews(apartment.getReviews());
-            for (Review review : existing.getReviews()) {
-                if (review != null) {
-                    review.setApartment(existing);
-                }
-            }
-        }
+        if (apartment.isGuestroom()) existing.setGuestroom(apartment.isGuestroom());
+        if (apartment.isBasement()) existing.setBasement(apartment.isBasement());
+        if (apartment.isHotwaterheating()) existing.setHotwaterheating(apartment.isHotwaterheating());
+        if (apartment.isAirconditioning()) existing.setAirconditioning(apartment.isAirconditioning());
+        if (apartment.isParking()) existing.setParking(apartment.isParking());
+        if (apartment.getFurnishingstatus() != null) existing.setFurnishingstatus(apartment.getRawFurnishingstatus());
 
         return apartmentRepository.save(existing);
     }
@@ -72,12 +59,8 @@ public class ApartmentService {
 
     public Apartment findApartmentById (String id){
         Optional<Apartment> found = apartmentRepository.findById(id);
-        if ( found.isPresent()) return found.get() ;
-        else return null;
-
+        return found.orElse(null);
     }
-
-    public void findApartmentByPrice (){}
 
 
 

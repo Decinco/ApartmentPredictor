@@ -1,82 +1,61 @@
 package com.example.apartment_predictor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class Apartment {
 
     @Id
     protected String id;
+    private String name;
     private Long price;
     protected Integer area;
     protected Integer bedrooms;
     private Integer bathrooms;
     private Integer stories;
-    private String mainroad;
-    private String guestroom;
-    private String basement;
-    private String hotwaterheating;
-    private String airconditioning;
-    private Integer parking;
-    private String prefarea;
-    private String furnishingstatus;
+    private boolean guestroom;
+    private boolean basement;
+    private boolean hotwaterheating;
+    private boolean airconditioning;
+    private boolean parking;
+    private FurnishingStatus furnishingstatus;
 
-    @OneToMany(
-            mappedBy = "apartment",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    private List<Review> reviews = new ArrayList<>();
-
-    // Default constructor
-    public Apartment() {
-        this.id = UUID.randomUUID().toString();
-    }
-
-    // Constructor with all fields
-    public Apartment(Long price, Integer area, Integer bedrooms, Integer bathrooms, 
-                    Integer stories, String mainroad, String guestroom, String basement,
-                    String hotwaterheating, String airconditioning,
-                    Integer parking, String prefarea, String furnishingstatus) {
-        this.id = UUID.randomUUID().toString();
+    public Apartment(String id, String name, Long price, Integer area, Integer bedrooms, Integer bathrooms, Integer stories, boolean guestroom, boolean basement, boolean hotwaterheating, boolean airconditioning, boolean parking, FurnishingStatus furnishingstatus) {
+        this.id = id;
+        this.name = name;
         this.price = price;
         this.area = area;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
         this.stories = stories;
-        this.mainroad = mainroad;
         this.guestroom = guestroom;
         this.basement = basement;
         this.hotwaterheating = hotwaterheating;
         this.airconditioning = airconditioning;
         this.parking = parking;
-        this.prefarea = prefarea;
         this.furnishingstatus = furnishingstatus;
     }
 
-
-    public double calculatePrice() {
-        double basePrice = area * 120 + (bedrooms * 8000);
-        return basePrice * (1 + (area * 0.04));
+    public Apartment() {
     }
 
-    // helpers
-
-    public void addReview(Review review) {
-        reviews.add(review);
-        review.setApartment(this);
+    public String getId() {
+        return id;
     }
 
-    public void removeReview(Review review) {
-        reviews.remove(review);
-        review.setApartment(null);
+    public void setId(String id) {
+        this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
 
-    // Getters and Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Long getPrice() {
         return price;
     }
@@ -117,104 +96,59 @@ public class Apartment {
         this.stories = stories;
     }
 
-    public String getMainroad() {
-        return mainroad;
-    }
-
-    public void setMainroad(String mainroad) {
-        this.mainroad = mainroad;
-    }
-
-    public String getGuestroom() {
+    public boolean isGuestroom() {
         return guestroom;
     }
 
-    public void setGuestroom(String guestroom) {
+    public void setGuestroom(boolean guestroom) {
         this.guestroom = guestroom;
     }
 
-    public String getBasement() {
+    public boolean isBasement() {
         return basement;
     }
 
-    public void setBasement(String basement) {
+    public void setBasement(boolean basement) {
         this.basement = basement;
     }
 
-    public String getHotwaterheating() {
+    public boolean isHotwaterheating() {
         return hotwaterheating;
     }
 
-    public void setHotwaterheating(String hotwaterheating) {
+    public void setHotwaterheating(boolean hotwaterheating) {
         this.hotwaterheating = hotwaterheating;
     }
 
-    public String getAirconditioning() {
+    public boolean isAirconditioning() {
         return airconditioning;
     }
 
-    public void setAirconditioning(String airconditioning) {
+    public void setAirconditioning(boolean airconditioning) {
         this.airconditioning = airconditioning;
     }
 
-    public Integer getParking() {
+    public boolean isParking() {
         return parking;
     }
 
-    public void setParking(Integer parking) {
+    public void setParking(boolean parking) {
         this.parking = parking;
     }
 
-    public String getPrefarea() {
-        return prefarea;
-    }
-
-    public void setPrefarea(String prefarea) {
-        this.prefarea = prefarea;
-    }
-
     public String getFurnishingstatus() {
+        return furnishingstatus.getLiteral();
+    }
+
+    @JsonIgnore
+    public FurnishingStatus getRawFurnishingstatus() {
         return furnishingstatus;
     }
 
-    public void setFurnishingstatus(String furnishingstatus) {
+    public void setFurnishingstatus(FurnishingStatus furnishingstatus) {
         this.furnishingstatus = furnishingstatus;
     }
 
-    public String getId() {
-        return id;
-    }
-
-   /* public void setId(String id) {
-        this.id = id;
-    }*/
-
-   public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    @Override
-    public String toString() {
-        return "Apartment{" +
-                "id=" + id +
-                ", price=" + price +
-                ", area=" + area +
-                ", bedrooms=" + bedrooms +
-                ", bathrooms=" + bathrooms +
-                ", stories=" + stories +
-                ", mainroad='" + mainroad + '\'' +
-                ", guestroom='" + guestroom + '\'' +
-                ", basement='" + basement + '\'' +
-                ", hotwater='" + hotwaterheating + '\'' +
-                ", airconditioning='" + airconditioning + '\'' +
-                ", parking=" + parking +
-                ", prefarea='" + prefarea + '\'' +
-                ", furnishingstatus='" + furnishingstatus + '\'' +
-                ", reviews='" + reviews.size() + '\'' +
-                '}';
-    }
+    // Funciones adicionales
+    public double calculatePrice() {return 0;}
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/apartment")
+@RequestMapping("aptPredictor/v1/apartments")
 public class ApartmentRestController {
 
     @Autowired
@@ -20,21 +20,15 @@ public class ApartmentRestController {
     @Autowired
     PopulateDB populateDB;
 
-    @GetMapping("/getAll")
+    // default mapping at aptPredictor/v1/apartments
+    @GetMapping("")
     public ResponseEntity<Iterable<Apartment>> getAllApartments(){
-
-       HttpHeaders headers = new HttpHeaders();
-        headers.add("Status", "getAllApartments executed");
-        headers.add("version", "1.0 Api Rest Apartment Object");
-        headers.add("active", "true");
-        headers.add("author", "Albert");
-
-        return ResponseEntity.ok().headers(headers).body(apartmentService.findAll());
+        return ResponseEntity.ok().body(apartmentService.findAll());
         //return apartmentService.findAll();
     }
 
-    @GetMapping("/getById")
-    public Apartment getApartmentById(@RequestParam String id){
+    @GetMapping("/{id}")
+    public Apartment getApartmentById(@PathVariable String id){
         return apartmentService.findApartmentById(id);
     }
 
@@ -44,31 +38,22 @@ public class ApartmentRestController {
         return apartmentService.createApartment(apartment);
     }
 
-    @PostMapping("/update")
-    public Apartment updateApartment(@RequestBody Apartment apartment){
-        return apartmentService.updateApartment(apartment);
-    }
-
-    @DeleteMapping("/deleteById")
-    public void deleteApartmentById(@RequestParam String id){
-        apartmentService.deleteApartment(id);
-    }
-
-    @PutMapping("/updateById")
-    public Apartment updateApartmentById(@RequestParam String id, @RequestBody Apartment apartment){
+    @PutMapping("/update/{id}")
+    public Apartment updateApartment(@PathVariable String id, @RequestBody Apartment apartment){
         return apartmentService.updateApartmentById(id, apartment);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteApartmentById(@PathVariable String id){
+        apartmentService.deleteApartment(id);
     }
 
     @GetMapping("/populate")
     public ResponseEntity<String> populateApartments(@RequestParam int qty) {
-        // CALL to PopulateDB.populateApartments() method
-        // to populate the database with random apartments
-        int qtyApartmenTsCreated = populateDB.populateApartments(qty);
-        if (qtyApartmenTsCreated > 0)
-            return ResponseEntity.ok("Populated apartments: " + qtyApartmenTsCreated);
+        int qtyApartmentsCreated = populateDB.populateApartments(qty);
+        if (qtyApartmentsCreated > 0)
+            return ResponseEntity.ok("Populated apartments: " + qtyApartmentsCreated);
         else
             return ResponseEntity.badRequest().body("Failed to populate apartments");
     }
-    
-
 }
