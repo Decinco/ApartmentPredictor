@@ -1,5 +1,7 @@
 package com.example.apartment_predictor.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum FurnishingStatus {
     UNFURNISHED("Unfurnished"),
     PARTIALLY_FURNISHED("Partially Furnished"),
@@ -11,6 +13,7 @@ public enum FurnishingStatus {
         literal = s;
     }
 
+    @JsonValue
     public String getLiteral() {
         return literal;
     }

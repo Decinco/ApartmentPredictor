@@ -39,9 +39,9 @@ public class ApartmentRestController {
         return apartmentService.createApartment(apartment);
     }
 
-    @PutMapping("/update/{id}")
-    public Apartment updateApartment(@PathVariable String id, @RequestBody Apartment apartment){
-        return apartmentService.updateApartmentById(id, apartment);
+    @PutMapping("/update")
+    public Apartment updateApartment(@RequestBody Apartment apartment){
+        return apartmentService.updateApartment(apartment);
     }
 
     @DeleteMapping("/delete/{id}")
