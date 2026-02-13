@@ -1,7 +1,9 @@
 package com.example.apartment_predictor.service;
 
 import com.example.apartment_predictor.model.Apartment;
+import com.example.apartment_predictor.model.School;
 import com.example.apartment_predictor.repository.ApartmentRepository;
+import com.example.apartment_predictor.repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ public class ApartmentService {
 
     @Autowired
     ApartmentRepository apartmentRepository;
+
+    @Autowired
+    SchoolRepository schoolRepository;
 
     public Iterable<Apartment> findAll() {
         return apartmentRepository.findAll();
@@ -59,6 +64,15 @@ public class ApartmentService {
     public Apartment findApartmentById (String id){
         Optional<Apartment> found = apartmentRepository.findById(id);
         return found.orElse(null);
+    }
+
+    public Apartment addNearbyschool(String id, String sid){
+        Apartment apartment = findApartmentById(id);
+        School school = schoolRepository.findById(sid).orElse(null);
+
+        apartment.addNearbySchool(school);
+
+        return apartmentRepository.save(apartment);
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.apartment_predictor.controller;
 
 import com.example.apartment_predictor.model.Apartment;
+import com.example.apartment_predictor.model.School;
 import com.example.apartment_predictor.service.ApartmentService;
 import com.example.apartment_predictor.utils.PopulateDB;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class ApartmentRestController {
     @GetMapping("/{id}")
     public Apartment getApartmentById(@PathVariable String id){
         return apartmentService.findApartmentById(id);
+    }
+
+    @GetMapping("/{id}/addnearbyschool/{sid}")
+    public Apartment setNearbyschool(@PathVariable String id, @PathVariable String sid){
+        return apartmentService.addNearbyschool(id, sid);
     }
 
     @PostMapping("/create")

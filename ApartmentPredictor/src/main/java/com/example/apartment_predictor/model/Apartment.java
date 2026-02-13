@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Apartment {
@@ -22,6 +24,9 @@ public class Apartment {
     private boolean parking;
     private FurnishingStatus furnishingstatus;
 
+    @ManyToMany
+    private List<School> nearbySchools = new ArrayList<>();
+
     public Apartment(String id, String name, Integer area, Integer bedrooms, Integer bathrooms, Integer stories, boolean guestroom, boolean basement, boolean hotwaterheating, boolean airconditioning, boolean parking, FurnishingStatus furnishingstatus) {
         this.id = id;
         this.name = name;
@@ -37,6 +42,7 @@ public class Apartment {
         this.furnishingstatus = furnishingstatus;
     }
 
+    // Constructors
     public Apartment() {
     }
 
@@ -44,6 +50,18 @@ public class Apartment {
         return id;
     }
 
+    // Nearby school management
+    public void addNearbySchool(School school) {
+        nearbySchools.add(school);
+        school.getAffectedApartments().add(this);
+    }
+
+    public void removeNearbySchool(School school) {
+        nearbySchools.remove(school);
+        school.getAffectedApartments().remove(this);
+    }
+
+    // Getters and setters
     public void setId(String id) {
         this.id = id;
     }
@@ -143,6 +161,14 @@ public class Apartment {
 
     public void setFurnishingstatus(FurnishingStatus furnishingstatus) {
         this.furnishingstatus = furnishingstatus;
+    }
+
+    public List<School> getNearbySchools() {
+        return nearbySchools;
+    }
+
+    public void setNearbySchools(List<School> nearbySchools) {
+        this.nearbySchools = nearbySchools;
     }
 
     // Funciones adicionales
