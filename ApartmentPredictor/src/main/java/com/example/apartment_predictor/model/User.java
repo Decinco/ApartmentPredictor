@@ -1,6 +1,6 @@
 package com.example.apartment_predictor.model;
 
-public class Person {
+public class User {
 
     //to do
 }
