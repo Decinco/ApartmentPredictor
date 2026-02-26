@@ -8,9 +8,9 @@
 		<version>3.2.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>co.decin</groupId>
 	<artifactId>apartment-predictor</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<name>ApartmentPredictor</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>

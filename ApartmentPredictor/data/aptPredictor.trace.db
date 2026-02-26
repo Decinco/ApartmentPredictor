@@ -53,7 +53,7 @@ alter table if exists apartment_nearby_schools add constraint FK1ado33jx6tv4o7j2
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331)
-	at com.example.apartment_predictor.ApartmentPredictorApplication.main(ApartmentPredictorApplication.java:23)
+	at co.decin.apartment_predictor.ApartmentPredictorApplication.main(ApartmentPredictorApplication.java:23)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)

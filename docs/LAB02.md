@@ -38,6 +38,7 @@ erDiagram
     OWNER {
         string id
         string nif
+        string phoneNumber
     }
     REVIEW {
         string id
@@ -48,12 +49,14 @@ erDiagram
     REVIEWER {
         string id
         string userDisplayName
+        Date reviewDate
     }
     USER {
         string id
         string firstName
         string lastName
         string email
+        int age
         byte[] password
     }
     CONTRACT {
@@ -80,6 +83,10 @@ erDiagram
 ### Review
 
 ### User
+
+User uses InheritanceType TABLE_PER_CLASS, which means both it and inheriting classes have a table with all possible fields (those from User and additional specific ones) in the database. This allows the api to get all the users, regardless of the category, and execute queries on them.
+
+The main reason why this method was chosen over @MappedSuperclass was making login more straightforward, as all the users can conveniently be found in a single table. The poor performance is not a concern as the class only serves as a parent for one "layer" of classes: no class will ever inherit from owner or reviewer.
 
 ### Reviewer: User
 
