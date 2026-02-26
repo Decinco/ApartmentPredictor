@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Apartment {
@@ -23,6 +25,15 @@ public class Apartment {
     protected boolean airConditioning;
     protected boolean parking;
     protected FurnishingStatus furnishingStatus;
+
+    @ManyToMany
+    protected List<School> nearbySchools = new ArrayList<>();
+
+    @OneToMany
+    protected List<Review> reviews = new ArrayList<>();
+
+    @OneToMany
+    protected List<Contract> contracts = new ArrayList<>();
 
     public Apartment(String id, String name, String description, String location, Integer area, Integer bedrooms, Integer bathrooms, Integer stories, boolean guestroom, boolean basement, boolean waterHeating, boolean airConditioning, boolean parking, FurnishingStatus furnishingStatus) {
         this.id = id;
@@ -165,6 +176,51 @@ public class Apartment {
         this.location = location;
     }
 
+    // foreign
+    public List<School> getNearbySchools() {
+        return nearbySchools;
+    }
+
+    public void setNearbySchools(List<School> nearbySchools) {
+        this.nearbySchools = nearbySchools;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Contract> getContracts() {
+        return contracts;
+    }
+
+    public void setContracts(List<Contract> contracts) {
+        this.contracts = contracts;
+    }
+
+    @Override
+    public String toString() {
+        return "Apartment{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", area=" + area +
+                ", bedrooms=" + bedrooms +
+                ", bathrooms=" + bathrooms +
+                ", stories=" + stories +
+                ", guestroom=" + guestroom +
+                ", basement=" + basement +
+                ", waterHeating=" + waterHeating +
+                ", airConditioning=" + airConditioning +
+                ", parking=" + parking +
+                ", furnishingStatus=" + furnishingStatus +
+                '}';
+    }
+
     // Funciones adicionales
     public Long calculatePrice() {
 
@@ -183,7 +239,6 @@ public class Apartment {
         switch (furnishingStatus) {
             case PARTIALLY_FURNISHED ->  price += 3000;
             case FULLY_FURNISHED -> price += 8500;
-            default -> price += 0;
         }
 
         // Simplified inflation simulation.
