@@ -3,6 +3,8 @@ package co.decin.apartment_predictor.model;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Entity
 public class Review {
     @Id
@@ -10,19 +12,25 @@ public class Review {
     private String title;
     private String contents;
     private Integer rating;
+    private Date date;
 
     @ManyToOne
     private Apartment apartment;
 
+    @ManyToOne
+    private Reviewer reviewer;
+
     public Review() {
     }
 
-    public Review(String id, String title, String contents, Integer rating, Apartment apartment) {
+    public Review(String id, String title, String contents, Integer rating, Date date, Apartment apartment, Reviewer reviewer) {
         this.id = id;
         this.title = title;
         this.contents = contents;
         this.rating = rating;
+        this.date = date;
         this.apartment = apartment;
+        this.reviewer = reviewer;
     }
 
     public String getId() {
@@ -57,6 +65,22 @@ public class Review {
         this.rating = rating;
     }
 
+    public Reviewer getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(Reviewer reviewer) {
+        this.reviewer = reviewer;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     // foreign
     public Apartment getApartment() {
         return apartment;
@@ -73,6 +97,9 @@ public class Review {
                 ", title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
                 ", rating=" + rating +
+                ", date=" + date +
+                ", apartment=" + apartment +
+                ", reviewer=" + reviewer +
                 '}';
     }
 }

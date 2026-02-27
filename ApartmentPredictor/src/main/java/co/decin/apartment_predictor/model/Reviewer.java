@@ -10,7 +10,6 @@ import java.util.List;
 public class Reviewer extends User {
     private String id;
     private String username;
-    private String date;
 
     @OneToMany
     private List<Review> reviews = new ArrayList<>();
@@ -18,10 +17,9 @@ public class Reviewer extends User {
     public Reviewer() {
     }
 
-    public Reviewer(String id, String username, String date) {
+    public Reviewer(String id, String username) {
         this.id = id;
         this.username = username;
-        this.date = date;
     }
 
     public String getId() {
@@ -40,14 +38,6 @@ public class Reviewer extends User {
         this.username = username;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     // foreign
     public List<Review> getReviews() {
         return reviews;
@@ -62,7 +52,6 @@ public class Reviewer extends User {
         return "Reviewer{" +
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
-                ", date='" + date + '\'' +
                 '}';
     }
 }
