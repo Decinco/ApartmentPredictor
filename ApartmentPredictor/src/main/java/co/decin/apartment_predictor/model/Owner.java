@@ -1,5 +1,6 @@
 package co.decin.apartment_predictor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -12,7 +13,8 @@ public class Owner extends User {
     private String nif;
     private String phoneNumber;
 
-    @OneToMany
+    @OneToMany(mappedBy = "owner")
+    @JsonIgnoreProperties({"owner", "attachedApartment"})
     private List<Contract> contracts = new ArrayList<>();
 
     public String getNif() {

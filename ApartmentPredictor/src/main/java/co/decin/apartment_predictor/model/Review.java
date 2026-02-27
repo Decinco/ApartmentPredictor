@@ -1,5 +1,6 @@
 package co.decin.apartment_predictor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,11 @@ public class Review {
     private Date date;
 
     @ManyToOne
+    @JsonIgnoreProperties({"reviews", "contracts", "nearbySchools"})
     private Apartment apartment;
 
     @ManyToOne
+    @JsonIgnoreProperties({"reviews"})
     private Reviewer reviewer;
 
     public Review() {

@@ -1,12 +1,13 @@
 package co.decin.apartment_predictor.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Arrays;
 
 @Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "applicationuser") // "user" is problematic
 public class User {
 
     @Id
@@ -17,7 +18,7 @@ public class User {
     protected Integer age;
 
     @JsonIgnore
-    private byte[] password; // Hashed and salted. Never shown in any API results, as the frontend will be the one to send the password attempt through the api.
+    private byte[] password; // Hashed and salted. Never shown in any API results, as the frontend will be the one to send the password attempt through the api. Also, TODO implementation.
 
     public User() {
     }

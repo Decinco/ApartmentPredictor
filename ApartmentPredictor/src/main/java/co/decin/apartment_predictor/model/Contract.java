@@ -1,5 +1,6 @@
 package co.decin.apartment_predictor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -11,22 +12,24 @@ public class Contract {
 
     @Id
     private String id;
-    private Date start;
-    private Date end;
+    private Date startDate;
+    private Date endDate;
 
     @ManyToOne
+    @JsonIgnoreProperties({"reviews", "contracts", "nearbySchools"})
     private Apartment attachedApartment;
 
     @ManyToOne
+    @JsonIgnoreProperties({"contracts"})
     private Owner owner;
 
     public Contract() {
     }
 
-    public Contract(String id, Date start, Date end, Apartment attachedApartment, Owner owner) {
+    public Contract(String id, Date startDate, Date endDate, Apartment attachedApartment, Owner owner) {
         this.id = id;
-        this.start = start;
-        this.end = end;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.attachedApartment = attachedApartment;
         this.owner = owner;
     }
@@ -39,20 +42,20 @@ public class Contract {
         this.id = id;
     }
 
-    public Date getStart() {
-        return start;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEnd() {
-        return end;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     // foreign
@@ -78,8 +81,8 @@ public class Contract {
     public String toString() {
         return "Contract{" +
                 "id='" + id + '\'' +
-                ", start=" + start +
-                ", end=" + end +
+                ", start=" + startDate +
+                ", end=" + endDate +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package co.decin.apartment_predictor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -11,7 +12,8 @@ public class Reviewer extends User {
     private String id;
     private String username;
 
-    @OneToMany
+    @OneToMany(mappedBy = "reviewer")
+    @JsonIgnoreProperties({"reviewer"})
     private List<Review> reviews = new ArrayList<>();
 
     public Reviewer() {

@@ -1,6 +1,7 @@
 package co.decin.apartment_predictor.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -27,12 +28,15 @@ public class Apartment {
     protected FurnishingStatus furnishingStatus;
 
     @ManyToMany
+    @JsonIgnoreProperties({"nearbyApartments", "levels"})
     protected List<School> nearbySchools = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "apartment")
+    @JsonIgnoreProperties({"apartment"})
     protected List<Review> reviews = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "attachedApartment")
+    @JsonIgnoreProperties({"attachedApartment", "owner"})
     protected List<Contract> contracts = new ArrayList<>();
 
     public Apartment(String id, String name, String description, String location, Integer area, Integer bedrooms, Integer bathrooms, Integer stories, boolean guestroom, boolean basement, boolean waterHeating, boolean airConditioning, boolean parking, FurnishingStatus furnishingStatus) {

@@ -1,5 +1,6 @@
 package co.decin.apartment_predictor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -19,6 +20,7 @@ public class School {
     private boolean isPublic;
 
     @ManyToMany
+    @JsonIgnoreProperties({"reviews", "contracts", "nearbySchools"})
     protected List<Apartment> nearbyApartments = new ArrayList<>();
 
     public School() {

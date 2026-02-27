@@ -11,10 +11,7 @@ import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -42,8 +39,10 @@ public class PopulateContract {
             Contract plainContract = new Contract();
             Date initialDate = faker.date().past(1100, TimeUnit.DAYS);
 
-            plainContract.setStart(initialDate);
-            plainContract.setEnd(faker.date().future(240, TimeUnit.DAYS, initialDate));
+            plainContract.setId(UUID.randomUUID().toString());
+
+            plainContract.setStartDate(initialDate);
+            plainContract.setEndDate(faker.date().future(240, TimeUnit.DAYS, initialDate));
 
             plainContract.setAttachedApartment(apartments.get(random.nextInt(apartments.size())));
             plainContract.setOwner(owners.get(random.nextInt(owners.size())));

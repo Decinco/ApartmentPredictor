@@ -12,7 +12,7 @@
 	<artifactId>apartment-predictor</artifactId>
 	<version>0.2.0-SNAPSHOT</version>
 	<name>ApartmentPredictor</name>
-	<description>Demo project for Spring Boot</description>
+	<description>ApartmentPredictor API and Database</description>
 	<url/>
 	<licenses>
 		<license/>

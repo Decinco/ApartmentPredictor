@@ -33,8 +33,8 @@ public class PopulateOwner {
             plainOwner.setEmail(name.firstName().toLowerCase() + "." + name.lastName().toLowerCase() + i + "@decin.co");
             plainOwner.setAge(random.nextInt(25, 75));
 
-            plainOwner.setNif(faker.regexify("^[0-9]{8}[A-Z]$"));
-            plainOwner.setPhoneNumber(faker.regexify("^(6)[ -]*([0-9][ -]*){8}$"));
+            plainOwner.setNif(faker.regexify("[0-9]{8}[A-Z]"));
+            plainOwner.setPhoneNumber(faker.regexify("6[0-9]{8}"));
 
             created.add(ownerService.createOwner(plainOwner));
         }
