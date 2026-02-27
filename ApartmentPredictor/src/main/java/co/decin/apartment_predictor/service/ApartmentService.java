@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Service
 public class ApartmentService {
+
     @Autowired
     ApartmentRepository apartmentRepository;
 
@@ -16,19 +17,19 @@ public class ApartmentService {
         return apartmentRepository.findAll();
     }
 
-    public Apartment createApartment(Apartment apartment){
+    public Apartment createApartment(Apartment apartment) {
         return apartmentRepository.save(apartment);
     }
 
-    public Apartment updateApartment (Apartment apartment){
+    public Apartment updateApartment(Apartment apartment) {
         return apartmentRepository.save(apartment);
     }
 
-    public void deleteApartment (String id){
+    public void deleteApartment(String id) {
         apartmentRepository.deleteById(id);
     }
 
-    public Apartment findApartmentById (String id){
+    public Apartment findApartmentById(String id) {
         Optional<Apartment> found = apartmentRepository.findById(id);
         return found.orElse(null);
     }

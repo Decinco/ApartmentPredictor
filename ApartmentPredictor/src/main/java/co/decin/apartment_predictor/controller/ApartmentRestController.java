@@ -15,34 +15,31 @@ public class ApartmentRestController {
     @Autowired
     ApartmentService apartmentService;
 
-    @Autowired
-    PopulateDB populateDB;
-
     // default mapping at aptPredictor/v1/apartments
     @GetMapping("")
     public ResponseEntity<Iterable<Apartment>> getAllApartments(){
         return ResponseEntity.ok().body(apartmentService.findAll());
-        //return apartmentService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Apartment getApartmentById(@PathVariable String id){
-        return apartmentService.findApartmentById(id);
+    public ResponseEntity<Apartment> getApartmentById(@PathVariable String id){
+        return ResponseEntity.ok().body(apartmentService.findApartmentById(id));
     }
 
     @PostMapping("/create")
-    public Apartment createApartment(@RequestBody Apartment apartment){
+    public ResponseEntity<Apartment> createApartment(@RequestBody Apartment apartment){
         //apartment.setId(UUID.randomUUID().toString());
-        return apartmentService.createApartment(apartment);
+        return ResponseEntity.ok().body(apartmentService.createApartment(apartment));
     }
 
     @PutMapping("/update")
-    public Apartment updateApartment(@RequestBody Apartment apartment){
-        return apartmentService.updateApartment(apartment);
+    public ResponseEntity<Apartment> updateApartment(@RequestBody Apartment apartment){
+        return ResponseEntity.ok().body(apartmentService.updateApartment(apartment));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteApartmentById(@PathVariable String id){
-        apartmentService.deleteApartment(id);
+    public ResponseEntity<String> deleteApartmentById(@PathVariable String id){
+            apartmentService.deleteApartment(id);
+            return ResponseEntity.ok().body("Deleted apartment " + id + " successfully");
     }
 }

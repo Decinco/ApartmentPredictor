@@ -6,9 +6,8 @@ public enum EducationLevel {
     SPANISH_ELEMENTARY("Primaria"),
     SPANISH_MIDDLE("ESO"),
     SPANISH_HIGH("Bachillerato"),
-    VOCATIONAL_INITIAL("FPI"),
-    VOCATIONAL_MIDDLE("CFGM"),
-    VOCATIONAL_HIGH("CFGS"),
+    SPANISH_VOCATIONAL_MIDDLE("CFGM"),
+    SPANISH_VOCATIONAL_HIGH("CFGS"),
     UNIVERSITY("University"),
     OTHER("Other");
 

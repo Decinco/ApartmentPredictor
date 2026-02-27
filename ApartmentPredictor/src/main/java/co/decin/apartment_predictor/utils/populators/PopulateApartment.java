@@ -1,6 +1,5 @@
-package co.decin.apartment_predictor.utils;
+package co.decin.apartment_predictor.utils.populators;
 
-import co.decin.apartment_predictor.repository.ApartmentRepository;
 import co.decin.apartment_predictor.service.ApartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
