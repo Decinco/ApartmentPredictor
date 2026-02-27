@@ -45,13 +45,4 @@ public class ApartmentRestController {
     public void deleteApartmentById(@PathVariable String id){
         apartmentService.deleteApartment(id);
     }
-
-    @GetMapping("/populate")
-    public ResponseEntity<String> populateApartments(@RequestParam int qty) {
-        int qtyApartmentsCreated = populateDB.populateApartments(qty);
-        if (qtyApartmentsCreated > 0)
-            return ResponseEntity.ok("Populated apartments: " + qtyApartmentsCreated);
-        else
-            return ResponseEntity.badRequest().body("Failed to populate apartments");
-    }
 }
