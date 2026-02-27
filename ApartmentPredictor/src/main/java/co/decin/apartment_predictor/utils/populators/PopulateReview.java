@@ -30,12 +30,12 @@ public class PopulateReview {
     public List<Review> populateReviews(int amount) {
         List<Review> created = new ArrayList<>();
         Random random = new Random();
-        Faker faker = new Faker();
 
         List<Apartment> apartments =  IterableUtils.toList(apartmentService.findAll());
         List<Reviewer> reviewers =  IterableUtils.toList(reviewerService.findAll());
 
         for (int i = 0; i < amount; i++) {
+            Faker faker = new Faker(new Random(random.nextInt()));
             Review plainReview = new Review();
             Date postDate = faker.date().past(1100, TimeUnit.DAYS);
 

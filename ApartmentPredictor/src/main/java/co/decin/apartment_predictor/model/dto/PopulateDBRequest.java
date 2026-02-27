@@ -1,4 +1,4 @@
-package co.decin.apartment_predictor.model;
+package co.decin.apartment_predictor.model.dto;
 
 public class PopulateDBRequest {
     private int apartments;

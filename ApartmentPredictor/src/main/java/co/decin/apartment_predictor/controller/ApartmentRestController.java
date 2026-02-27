@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("aptPredictor/v1/apartments")
+    @RequestMapping("aptPredictor/v1/apartments")
 public class ApartmentRestController {
 
     @Autowired

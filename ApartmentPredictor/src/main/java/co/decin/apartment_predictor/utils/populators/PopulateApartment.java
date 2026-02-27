@@ -22,11 +22,12 @@ public class PopulateApartment {
     public List<Apartment> populateApartments(int amount) {
         List<Apartment> created = new ArrayList<>();
         Random random = new Random();
-        Faker faker = new Faker();
 
         FurnishingStatus[] furnishingStatuses = FurnishingStatus.values();
 
         for (int i = 0; i < amount; i++) {
+            Faker faker = new Faker(new Random(random.nextInt()));
+
             Apartment apartment = new Apartment();
             Address apartmentAddress = faker.address();
 

@@ -22,10 +22,9 @@ public class PopulateReviewer {
         List<Reviewer> created = new ArrayList<>();
         Random random = new Random();
 
-        Faker faker = new Faker();
-
         for (int i = 0; i < amount; i++) {
             Reviewer plainReviewer = new Reviewer();
+            Faker faker = new Faker(new Random(random.nextInt()));
             Name name = faker.name();
 
             plainReviewer.setId(UUID.randomUUID().toString());

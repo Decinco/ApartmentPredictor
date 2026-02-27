@@ -1,4 +1,6 @@
-package co.decin.apartment_predictor.model;
+package co.decin.apartment_predictor.model.dto;
+
+import co.decin.apartment_predictor.model.*;
 
 import java.util.List;
 

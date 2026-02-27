@@ -25,11 +25,11 @@ public class PopulateSchool {
     public List<School> populateSchools(int amount) {
         List<School> created = new ArrayList<>();
         Random random = new Random();
-        Faker faker = new Faker();
 
         EducationLevel[] allLevels = EducationLevel.values();
 
         for (int i = 0; i < amount; i++) {
+            Faker faker = new Faker(new Random(random.nextInt()));
             School plainSchool = new School();
             Address address = faker.address();
 

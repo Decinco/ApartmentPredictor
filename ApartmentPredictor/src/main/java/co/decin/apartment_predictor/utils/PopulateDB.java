@@ -1,16 +1,13 @@
 package co.decin.apartment_predictor.utils;
 
 import co.decin.apartment_predictor.model.*;
-import co.decin.apartment_predictor.repository.SchoolRepository;
-import co.decin.apartment_predictor.service.ApartmentService;
-import co.decin.apartment_predictor.service.ReviewerService;
+import co.decin.apartment_predictor.model.dto.PopulateDBRequest;
+import co.decin.apartment_predictor.model.dto.PopulateDBReturn;
 import co.decin.apartment_predictor.utils.populators.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class PopulateDB {

@@ -33,9 +33,8 @@ public class PopulateContract {
         List<Apartment> apartments =  IterableUtils.toList(apartmentService.findAll());
         List<Owner> owners =  IterableUtils.toList(ownerService.findAll());
 
-        Faker faker = new Faker();
-
         for (int i = 0; i < amount; i++) {
+            Faker faker = new Faker(new Random(random.nextInt()));
             Contract plainContract = new Contract();
             Date initialDate = faker.date().past(1100, TimeUnit.DAYS);
 

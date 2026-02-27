@@ -21,9 +21,9 @@ public class PopulateOwner {
     public List<Owner> populateOwners(int amount) {
         List<Owner> created = new ArrayList<>();
         Random random = new Random();
-        Faker faker = new Faker();
 
         for (int i = 0; i < amount; i++) {
+            Faker faker = new Faker(new Random(random.nextInt()));
             Owner plainOwner = new Owner();
             Name name = faker.name();
 
