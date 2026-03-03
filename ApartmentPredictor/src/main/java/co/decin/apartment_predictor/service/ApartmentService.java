@@ -25,8 +25,7 @@ public class ApartmentService {
         return apartmentRepository.save(apartment);
     }
 
-    public void deleteApartment(String id) {
-        apartmentRepository.deleteById(id);
+    public void deleteApartment(String id) {apartmentRepository.deleteById(id);
     }
 
     public Apartment findApartmentById(String id) {

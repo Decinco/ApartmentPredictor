@@ -1,10 +1,9 @@
 package co.decin.apartment_predictor.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-
-import javax.crypto.Cipher;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class Owner extends User {
     private String nif;
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"owner", "attachedApartment"})
     private List<Contract> contracts = new ArrayList<>();
 

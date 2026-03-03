@@ -33,7 +33,7 @@ public class PopulateApartment {
 
             apartment.setId(UUID.randomUUID().toString());
             apartment.setName("Apartment in " + apartmentAddress.cityName());
-            apartment.setDescription("An amazing apartment located in the " + apartmentAddress.cityName() + ", " + apartmentAddress.state());
+            apartment.setDescription("An amazing apartment located in " + apartmentAddress.cityName() + ", " + apartmentAddress.state());
             apartment.setLocation(apartmentAddress.fullAddress());
             apartment.setArea(random.nextInt(50, 251));
             apartment.setBedrooms(random.nextInt(1, 5));

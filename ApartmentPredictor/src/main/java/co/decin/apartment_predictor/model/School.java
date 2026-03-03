@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PreRemove;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class School {
@@ -102,5 +102,21 @@ public class School {
                 ", rating=" + rating +
                 ", isPublic=" + isPublic +
                 '}';
+    }
+
+    // ManyToMany link operations
+    @PreRemove
+    private void removeNearbyApartments() {
+        for (Apartment apartment : nearbyApartments) {
+            apartment.getNearbySchools().remove(this);
+        }
+        nearbyApartments.clear();
+    }
+
+    public void addNearbyApartments(List<Apartment> apartments) {
+        for (Apartment apartment: apartments) {
+            apartment.getNearbySchools().add(this);
+        }
+        nearbyApartments.addAll(apartments);
     }
 }

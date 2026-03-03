@@ -31,11 +31,11 @@ public class Apartment {
     @JsonIgnoreProperties({"nearbyApartments", "levels"})
     protected List<School> nearbySchools = new ArrayList<>();
 
-    @OneToMany(mappedBy = "apartment")
+    @OneToMany(mappedBy = "apartment", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"apartment"})
     protected List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "attachedApartment")
+    @OneToMany(mappedBy = "attachedApartment", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"attachedApartment", "owner"})
     protected List<Contract> contracts = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class Apartment {
 
     public Long getPrice() {
         return calculatePrice();
-    }
+    } // Calculated dynamically
 
     public Integer getArea() {
         return area;
@@ -255,5 +255,21 @@ public class Apartment {
         multiplier = 1 + daysPassed * 0.000075;
 
         return Math.round(price * multiplier);
+    }
+
+    // ManyToMany link operations
+    @PreRemove
+    private void removeNearbySchools() {
+        for (School school : nearbySchools) {
+            school.getNearbyApartments().remove(this);
+        }
+        nearbySchools.clear();
+    }
+
+    private void addNearbySchools(List<School> schools) {
+        for (School school : schools) {
+            school.getNearbyApartments().remove(this);
+        }
+        nearbySchools.addAll(schools);
     }
 }

@@ -47,7 +47,7 @@ public class PopulateSchool {
             }
             plainSchool.setLevels(levels);
 
-            plainSchool.setNearbyApartments(generateNearbyApartments(random));
+            plainSchool.addNearbyApartments(generateNearbyApartments(random));
 
             created.add(schoolService.createSchool(plainSchool));
         }
