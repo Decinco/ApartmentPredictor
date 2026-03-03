@@ -98,11 +98,13 @@ Apartment returns the following values:
     "furnishingStatus": "Unfurnished",
     "nearbySchools": [],
     "reviews": [],
-    "contracts": []
+    "contracts": [],
+    "price": 986764
 }
 ```
 
-*furnishingStatus* can be "Unfurnished", "Partially Furnished" or "Fully Furnished"
+*furnishingStatus* can be "Unfurnished", "Partially Furnished" or "Fully Furnished". 
+Price is calculated on query based on the apartment's specifications.
 
 ### Contract
 
