@@ -1,6 +1,7 @@
 package co.decin.apartment_predictor.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -12,7 +13,7 @@ public class Reviewer extends User {
     private String id;
     private String username;
 
-    @OneToMany(mappedBy = "reviewer")
+    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"reviewer"})
     private List<Review> reviews = new ArrayList<>();
 
